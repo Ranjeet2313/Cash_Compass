@@ -1,5 +1,6 @@
 package com.example.expensetrackersystem;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -32,23 +33,22 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.income:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new Income()).commit();
-                return true;
+        int itemId = item.getItemId();
 
-            case R.id.dashboard:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new Dashboard()).commit();
-                return true;
-
-            case R.id.expense:
-                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new Expense()).commit();
-                return true;
-
-            default:
-                return false;
+        if (itemId == R.id.income) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new Income()).commit();
+            return true;
+        } else if (itemId == R.id.dashboard) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new Dashboard()).commit();
+            return true;
+        } else if (itemId == R.id.expense) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new Expense()).commit();
+            return true;
+        } else {
+            return false;
         }
     }
 }

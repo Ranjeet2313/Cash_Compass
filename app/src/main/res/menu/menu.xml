@@ -1,14 +1,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id="@+id/income"
-    android:icon="@drawable/add"
-    android:title="Income" />
-<item
-    android:id="@+id/dashboard"
-    android:icon="@drawable/menu"
-    android:title="Dashboard" />
-<item
-    android:id="@+id/expense"
-    android:icon="@drawable/minus"
-    android:title="Expense" />
+    <item
+        android:id="@+id/dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="Dashboard" />
+
+    <item
+        android:id="@+id/income"
+        android:icon="@drawable/ic_income"
+        android:title="Income" />
+
+    <item
+        android:id="@+id/expense"
+        android:icon="@drawable/ic_expense"
+        android:title="Expense" />
+
+    <item
+        android:id="@+id/saving"
+        android:icon="@drawable/ic_saving"
+        android:title="Saving" />
 </menu>

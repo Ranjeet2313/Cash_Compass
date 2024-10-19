@@ -1,14 +1,41 @@
 package com.example.expensetrackersystem.model;
 
 public class expenseModel {
-    String id, amount, type, note, date;
+    private String id;
+    private String description;
+    private String amount;
+    private String date;
 
+    // Empty constructor (for Firebase and object initialization)
+    public expenseModel() {
+    }
+
+    // Constructor with four parameters
+    public expenseModel(String id, String description, String amount, String date) {
+        this.id = id;
+        this.description = description;
+        this.amount = amount;
+        this.date = date;
+    }
+
+    public expenseModel(String string, String string1, String string2, String string3, String string4) {
+    }
+
+    // Getters and Setters
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getAmount() {
@@ -19,22 +46,6 @@ public class expenseModel {
         this.amount = amount;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
     public String getDate() {
         return date;
     }
@@ -43,14 +54,11 @@ public class expenseModel {
         this.date = date;
     }
 
-    public expenseModel() {
+    public String getType() {
+        return null;
     }
 
-    public expenseModel(String id, String amount, String type, String note, String date) {
-        this.id = id;
-        this.amount = amount;
-        this.type = type;
-        this.note = note;
-        this.date = date;
+    public int getNote() {
+        return 0;
     }
 }

@@ -25,7 +25,7 @@ public class expenseAdapter2 extends RecyclerView.Adapter<expenseAdapter2.viewho
     private List<expenseModel> expenseModelList;
     private DatabaseHandlerExpense databaseHandler;
 
-    public expenseAdapter2(Context context, List<expenseModel> expenseModelList, DatabaseHandlerExpense databaseHandler) {
+    public expenseAdapter2(Context context, List<expenseModel> expenseModelList) {
         this.context = context;
         this.expenseModelList = expenseModelList;
         this.databaseHandler = databaseHandler;

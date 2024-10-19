@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.expensetrackersystem">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,21 +13,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExpenseTrackerSystem"
         tools:targetApi="donut">
+
+        <!-- Login activity as the launcher activity -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Main activity (dashboard) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+
+
+
+        <!-- Register activity -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
+
+        <!-- Other activities -->
         <activity
             android:name=".PieChartIncome"
             android:exported="true" />
         <activity
             android:name=".PieChart"
             android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

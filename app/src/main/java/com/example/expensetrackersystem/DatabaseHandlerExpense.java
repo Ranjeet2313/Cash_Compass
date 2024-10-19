@@ -1,96 +1,50 @@
 package com.example.expensetrackersystem;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 import com.example.expensetrackersystem.model.expenseModel;
-import com.example.expensetrackersystem.model.incomeModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHandlerExpense extends SQLiteOpenHelper {
+public class DatabaseHandlerExpense {
 
-    public static final String DATABASE_NAME = "expense.db";
-    public static final String TABLE_NAME = "expense_data";
-    public static final String COL1 = "ID";
-    public static final String COL2 = "AMOUNT";
-    public static final String COL3 = "TYPE";
-    public static final String COL4 = "NOTE";
-    public static final String COL5 = "DATE";
+    private DatabaseReference databaseRef;
+    private FirebaseAuth firebaseAuth;
+    private List<expenseModel> expenseModelList;
 
-    public DatabaseHandlerExpense(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 1);
+    public DatabaseHandlerExpense(Context context) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        String userId = firebaseAuth.getUid();
+        databaseRef = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Expenses");
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT," + "AMOUNT TEXT," + "TYPE TEXT," + "NOTE TEXT," + "DATE TEXT)";
-        db.execSQL(createTable);
+    // Add expense data to Firebase
+    public void addData(String amount, String type, String note, String date) {
+        String expenseId = databaseRef.push().getKey();  // Generate a unique ID for each entry
+        expenseModel expense = new expenseModel(expenseId, amount, type, note, date);
+        databaseRef.child(expenseId).setValue(expense);  // Save the expense under the generated ID
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String a = "DROP TABLE IF EXISTS " + TABLE_NAME;
-        db.execSQL(a);
-        onCreate(db);
-    }
-
-    public boolean addData(String amount, String type, String note, String date) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, amount);
-        contentValues.put(COL3, type);
-        contentValues.put(COL4, note);
-        contentValues.put(COL5, date);
-
-        long result = db.insert(TABLE_NAME, null, contentValues);
-
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
+    // Update existing expense data in Firebase
     public void update(String id, String amount, String type, String note, String date) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, amount);
-        contentValues.put(COL3, type);
-        contentValues.put(COL4, note);
-        contentValues.put(COL5, date);
+        expenseModel expense = new expenseModel(id, amount, type, note, date);
+        databaseRef.child(id).setValue(expense);  // Update the existing expense entry
+    }
 
-        long result = database.update(TABLE_NAME, contentValues, "id=?", new String[]{id});
-        if (result == -1) {
-        } else {
-        }
+    // Retrieve all expenses from Firebase (you may need to handle this asynchronously in your Fragment or Activity)
+    public List<expenseModel> getAllExpenses() {
+        List<expenseModel> expenseModelList = new ArrayList<>();
+        // Implement a ValueEventListener in your fragment/activity to fetch data asynchronously
+        return expenseModelList;
     }
 
     public List<expenseModel> getAllIncome() {
-        List<expenseModel> incomeModelList = new ArrayList<>();
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-
-        if (data.getCount() == 0) {
-
-        } else {
-            if (incomeModelList == null) {
-                incomeModelList = new ArrayList<>();
-            }
-
-            while (data.moveToNext()) {
-                incomeModelList.add(new expenseModel(data.getString(0), data.getString(1), data.getString(2), data.getString(3), data.getString(4)));
-            }
-        }
-
-        return incomeModelList;
+        return java.util.Collections.emptyList();
     }
-
 }

@@ -1,21 +1,41 @@
 package com.example.expensetrackersystem.model;
 
 public class incomeModel {
-    String id, amount, type, note, date;
+    private String id;
+    private String description;
+    private String amount;
+    private String date;
 
+    // Empty constructor (needed for Firebase or default object initialization)
     public incomeModel() {
     }
 
-    public String getDate() {
-        return date;
+    // Constructor with four parameters
+    public incomeModel(String id, String description, String amount, String date) {
+        this.id = id;
+        this.description = description;
+        this.amount = amount;
+        this.date = date;
     }
 
+    public incomeModel(String string, String string1, String string2, String string3, String string4) {
+    }
+
+    // Getters and Setters
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getAmount() {
@@ -26,32 +46,19 @@ public class incomeModel {
         this.amount = amount;
     }
 
+    public String getDate() {
+        return date;
+    }
+
     public void setDate(String date) {
         this.date = date;
     }
 
-    public incomeModel(String id, String amount, String type, String note, String date) {
-        this.id = id;
-        this.amount = amount;
-        this.type = type;
-        this.note = note;
-        this.date = date;
+    public int getNote() {
+        return 0;
     }
 
     public String getType() {
-        return type;
+        return null;
     }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
 }

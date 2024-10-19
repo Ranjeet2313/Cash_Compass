@@ -27,7 +27,7 @@ public class incomeAdapter2 extends RecyclerView.Adapter<incomeAdapter2.viewhold
 
     private DatabaseHandler databaseHandler;
 
-    public incomeAdapter2(Context context, List<incomeModel> expenseModelList, DatabaseHandler databaseHandler) {
+    public incomeAdapter2(Context context, List<incomeModel> expenseModelList) {
         this.context = context;
         this.expenseModelList = expenseModelList;
         this.databaseHandler = databaseHandler;
